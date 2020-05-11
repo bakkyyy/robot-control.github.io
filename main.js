@@ -57,7 +57,7 @@ function send(data) {
 
 // Запрос выбора Bluetooth устройства
 function requestBluetoothDevice() {
-    log('Запрашиваем bluetooth device...');
+    log('Запрашиваем bluetooth устройство...');
 
     return navigator.bluetooth.requestDevice({
         filters: [{
@@ -65,7 +65,7 @@ function requestBluetoothDevice() {
         }],
     }).
     then(device => {
-        log('"' + device.name + '" bluetooth device выбран ');
+        log('"' + device.name + '" bluetooth устройство выбрано ');
         deviceCache = device;
         //для отслеживания разъеденения 
         deviceCache.addEventListener('gattserverdisconnected',
@@ -79,7 +79,7 @@ function handleDisconnection(event) {
     let device = event.target;
 
     log('"' + device.name +
-        '" bluetooth device отключен, попытка переподключиться...');
+        '" bluetooth устройство отключено, попытка переподключиться...');
 
     connectDeviceAndCacheCharacteristic(device).
     then(characteristic => startNotifications(characteristic)).
