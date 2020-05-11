@@ -1,0 +1,22 @@
+{
+    "name": "Robot Control Progressive Web App",
+    "short_name": "Robot Control",
+    "description": "Progressive Web App интерпретатор для управления роботом",
+    "icons": [
+        {
+            "src": "icons/favicon-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        // ...
+        {
+            "src": "icons/android-chrome-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        }
+    ],
+    "start_url": /Program/index.html",
+    "display": "fullscreen",
+    "theme_color": "#B12A34",
+    "background_color": "#B12A34"
+}
