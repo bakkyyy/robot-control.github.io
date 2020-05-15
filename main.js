@@ -60,9 +60,7 @@ function requestBluetoothDevice() {
     log('Запрашиваем bluetooth устройство...');
 
     return navigator.bluetooth.requestDevice({
-        filters: [{
-            services: [0xFFE0]
-        }],
+        acceptAllDevices: true
     }).
     then(device => {
         log('"' + device.name + '" bluetooth устройство выбрано ');
