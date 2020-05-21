@@ -1,5 +1,5 @@
 var myDevice;
-var myService = 0x000C; // fill in a service you're looking for here
+var myService = "00001101-0000-1000-8000-00805F9B34FB"; // fill in a service you're looking for here
 var myCharacteristic = 0xffb2; // fill in a characteristic from the service here
 
 function connect() {
