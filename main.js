@@ -8,7 +8,6 @@ let inputField = document.getElementById('input');
 // Подключение к устройству при нажатии на кнопку Connect
 connectButton.addEventListener('click', function () {
     connect();
-    alert('asd')
 });
 
 // Отключение от устройства при нажатии на кнопку Disconnect
@@ -48,7 +47,8 @@ function requestBluetoothDevice() {
             },
 
         ],
-        optionalServices: [0x1111]
+        optionalServices: [0x8954],
+        acceptAllDevices: true
     }).
     then(device => {
         log('"' + device.name + '" bluetooth device selected');
