@@ -40,11 +40,10 @@ function requestBluetoothDevice() {
     log('Requesting bluetooth device...');
     return navigator.bluetooth.requestDevice({
         acceptAllDevices: true,
-        optionalServices: ['0000aaa0-0000-1000-8000-aabbccddeeff']
+        optionalServices: ['0000aaa0-0000-1000-8000-aabbccddeeff', 0x1801, 0x1800, 0x180D, 0x181C]
     }).
     then(device => {
         log('"' + device.name + '" bluetooth device selected');
-        console.log("step 1")
         console.log(device)
         deviceCache = device;
 
@@ -78,13 +77,10 @@ function connectDeviceAndCacheCharacteristic(device) {
     }
 
     log('Connecting to GATT server...');
-    console.log("step 2")
     return device.gatt.connect().
     then(server => {
         log('GATT server connected, getting service...');
-        console.log("step 3")
         let test = server.getPrimaryService(0x181C);
-        console.log("step 4")
         return test
     }).
     then(service => {
