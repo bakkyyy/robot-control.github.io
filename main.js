@@ -8,6 +8,7 @@ let inputField = document.getElementById('input');
 // Подключение к устройству при нажатии на кнопку Connect
 connectButton.addEventListener('click', function () {
     connect();
+    alert('asd')
 });
 
 // Отключение от устройства при нажатии на кнопку Disconnect
@@ -38,13 +39,21 @@ function connect() {
 // Запрос выбора Bluetooth устройства
 function requestBluetoothDevice() {
     log('Requesting bluetooth device...');
-
     return navigator.bluetooth.requestDevice({
-        acceptAllDevices: true,
-        optionalService: ['0000aaa0-0000-1000-8000-aabbccddeeff']
+        filters: [{
+                services: [0x1801, 0x1800, 0x180D, 0x180C]
+            },
+            {
+                services: ['0000aaa0-0000-1000-8000-aabbccddeeff']
+            },
+
+        ],
+        optionalServices: [0x1111]
     }).
     then(device => {
         log('"' + device.name + '" bluetooth device selected');
+        console.log("step 1")
+        console.log(device)
         deviceCache = device;
 
         // Добавленная строка
@@ -77,12 +86,14 @@ function connectDeviceAndCacheCharacteristic(device) {
     }
 
     log('Connecting to GATT server...');
-
+    console.log("step 2")
     return device.gatt.connect().
     then(server => {
         log('GATT server connected, getting service...');
-
-        return server.getPrimaryService(0x181C);
+        console.log("step 3")
+        let test = server.getPrimaryService(0x181C);
+        console.log("step 4")
+        return test
     }).
     then(service => {
         log('Service found, getting characteristic...');
