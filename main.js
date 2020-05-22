@@ -41,7 +41,7 @@ function requestBluetoothDevice() {
 
     return navigator.bluetooth.requestDevice({
         acceptAllDevices: true,
-        optionalService: ['0x1111']
+        optionalService: ['0x181C']
     }).
     then(device => {
         log('"' + device.name + '" bluetooth device selected');
