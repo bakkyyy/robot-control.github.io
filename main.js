@@ -40,6 +40,9 @@ function requestBluetoothDevice() {
     log('Requesting bluetooth device...');
 
     return navigator.bluetooth.requestDevice({
+        filters: [{
+            name: "Honor 7A Pro"
+        }],
         acceptAllDevices: true
     }).
     then(device => {
