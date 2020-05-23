@@ -86,7 +86,7 @@ function connectDeviceAndCacheCharacteristic(device) {
     then(service => {
         log('Service found, getting characteristic...');
 
-        return service.getCharacteristic("0000aaa2-0000-1000-8000-aabbccddeeff");
+        return service.getCharacteristic("0000aaa1-0000-1000-8000-aabbccddeeff");
     }).
     then(characteristic => {
         log('Characteristic found');
