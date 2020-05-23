@@ -1,11 +1,113 @@
-#terminal div {
-	color: gray;
+.out {
+	color: rgb(255, 145, 0);
 }
 
-#terminal div.out {
-	color: red;
+body {
+	background-color: #222222;
 }
 
-#terminal div.in {
-	color: blue;
+.terminal {
+	border: 1px solid #21fe96;
+	background-color: #000000;
+	color: #21fe96;
+	width: 80%;
+	margin: 0 auto;
+	height: 30vh;
+	overflow: auto;
+	margin-top: 10vw;
+	font-size: 20px;
+}
+
+.connect-panel {
+	top: 11vw;
+	margin: 0 auto;
+	width: 80%;
+	margin-top: 3vw;
+	display: flex;
+	justify-content: space-between;
+}
+
+button {
+	display: block;
+	position: relative;
+	display: inline-block;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	border: none;
+	color: black;
+	background: rgb(255, 145, 0);
+	box-shadow: inset rgba(0, 0, 0, .6) 0 -2px 5px, inset rgba(252, 255, 255, .7) 0 2px 5px, rgba(0, 0, 0, .8) 0 2px 5px -1px;
+}
+
+.connect-button {
+	font-size: 20px;
+	text-align: center;
+	padding-top: 2%;
+	width: 48%;
+	padding-bottom: 2%;
+	border-radius: 70px;
+}
+
+.clear {
+	font-size: 20px;
+	text-align: center;
+	padding-top: 2%;
+	width: 30%;
+	padding-bottom: 2%;
+	border-radius: 70px;
+	position: absolute;
+	right: 10%;
+	bottom: 45vh;
+}
+
+.version {
+	position: absolute;
+	bottom: 0;
+	right: 1%;
+}
+
+.move-panel {
+	position: absolute;
+	width: 210px;
+	height: 210px;
+	bottom: 10%;
+	left: 10%;
+}
+
+.horizontal {
+	position: absolute;
+	width: 210px;
+	height: 70px;
+	margin-top: 70px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.vertical {
+	height: 210px;
+	width: 70px;
+	margin-left: 70px;
+	position: absolute;
+}
+
+.down {
+	margin-top: 70px;
+}
+
+.move {
+	width: 70px;
+	height: 70px;
+	font-size: 30px;
+	border-radius: 70px;
+}
+
+.move:active {
+	padding-bottom: 1px;
+	box-shadow:
+		inset rgba(0, 0, 0, 1) 0 1px 3px,
+		inset rgba(0, 0, 0, .6) 0 -2px 5px,
+		inset rgba(252, 255, 255, .7) 0 2px 5px,
+		0 1px rgba(255, 255, 255, .08);
+	color: #21fe96;
 }
