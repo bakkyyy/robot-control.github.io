@@ -44,7 +44,6 @@ button {
 	font-size: 20px;
 	text-align: center;
 	padding-top: 2%;
-	width: 48%;
 	padding-bottom: 2%;
 	border-radius: 70px;
 }
@@ -56,9 +55,8 @@ button {
 	width: 30%;
 	padding-bottom: 2%;
 	border-radius: 70px;
-	position: absolute;
-	right: 10%;
-	bottom: 45vh;
+	margin-left: 60%;
+	margin-top: 10%;
 }
 
 .version {
