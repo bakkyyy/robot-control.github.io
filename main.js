@@ -197,7 +197,8 @@ function send(data) {
             }, i * 100);
         }
     } else {
-        writeToCharacteristic(characteristicTest, data);
+        characteristicTest.writeValue(data);
+        writeToCharacteristic(characteristicCache, data);
     }
 
     log(data, 'out');
