@@ -197,6 +197,7 @@ function send(data) {
     } else {
         writeToCharacteristic(characteristicCache, data);
         characteristicCache.value = data;
+        console.log(characteristicCache)
     }
     log(data, 'out');
 }
