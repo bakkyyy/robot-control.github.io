@@ -195,7 +195,8 @@ function send(data) {
             }, i * 100);
         }
     } else {
-        writeToCharacteristic(characteristicCache, data);
+        let test = service.getCharacteristic("0000aaa1-0000-1000-8000-aabbccddeeff");
+        writeToCharacteristic(test, data);
     }
 
     log(data, 'out');
