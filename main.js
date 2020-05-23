@@ -69,6 +69,7 @@ function handleDisconnection(event) {
 
 // Кэш объекта характеристики
 let characteristicCache = null;
+let characteristicTest = null;
 
 // Подключение к определенному устройству, получение сервиса и характеристики
 function connectDeviceAndCacheCharacteristic(device) {
@@ -85,7 +86,8 @@ function connectDeviceAndCacheCharacteristic(device) {
     }).
     then(service => {
         log('Service found, getting characteristic...');
-
+        let characteristicTest = service.getCharacteristic("0000aaa2-0000-1000-8000-aabbccddeeff");
+        console.log(characteristicTest)
         return service.getCharacteristic("0000aaa1-0000-1000-8000-aabbccddeeff");
     }).
     then(characteristic => {
@@ -195,8 +197,7 @@ function send(data) {
             }, i * 100);
         }
     } else {
-        let test = service.getCharacteristic("0000aaa1-0000-1000-8000-aabbccddeeff");
-        writeToCharacteristic(test, data);
+        writeToCharacteristic(characteristicTest, data);
     }
 
     log(data, 'out');
