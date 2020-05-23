@@ -141,32 +141,32 @@ function disconnect() {
     deviceCache = null;
 }
 
-// // Получение данных
-// function handleCharacteristicValueChanged(event) {
-//     let value = new TextDecoder().decode(event.target.value);
-//     log(value, 'in');
-// }
+// Получение данных
+function handleCharacteristicValueChanged(event) {
+    let value = new TextDecoder().decode(event.target.value);
+    log(value, 'in');
+}
 
 // Промежуточный буфер для входящих данных
 let readBuffer = '';
 
-//Получение данных
-function handleCharacteristicValueChanged(event) {
-    let value = new TextDecoder().decode(event.target.value);
+// //Получение данных
+// function handleCharacteristicValueChanged(event) {
+//     let value = new TextDecoder().decode(event.target.value);
 
-    for (let c of value) {
-        if (c === '\n') {
-            let data = readBuffer.trim();
-            readBuffer = '';
+//     for (let c of value) {
+//         if (c === '\n') {
+//             let data = readBuffer.trim();
+//             readBuffer = '';
 
-            if (data) {
-                receive(data);
-            }
-        } else {
-            readBuffer += c;
-        }
-    }
-}
+//             if (data) {
+//                 receive(data);
+//             }
+//         } else {
+//             readBuffer += c;
+//         }
+//     }
+// }
 
 // Обработка полученных данных
 function receive(data) {
