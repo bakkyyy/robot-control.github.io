@@ -86,13 +86,13 @@ function connectDeviceAndCacheCharacteristic(device) {
     then(service => {
         log('Service found, getting characteristic...');
         //let characteristic2 = service.getCharacteristic("0000aaa2-0000-1000-8000-aabbccddeeff");
-        console.log(characteristicTest)
+
         return service.getCharacteristic("0000aaa2-0000-1000-8000-aabbccddeeff");
     }).
     then(characteristic => {
         log('Characteristic found');
         characteristicCache = characteristic;
-
+        console.log(characteristicCache)
         return characteristicCache;
     });
 }
@@ -198,7 +198,6 @@ function send(data) {
     } else {
         writeToCharacteristic(characteristicCache, data);
     }
-    characteristic2.target.value = 'test';
     log(data, 'out');
 }
 
