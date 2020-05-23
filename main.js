@@ -4,7 +4,6 @@ let disconnectButton = document.getElementById('disconnect');
 let terminalContainer = document.getElementById('terminal');
 let sendForm = document.getElementById('send-form');
 let inputField = document.getElementById('input');
-//let readButton = document.getElementById('read');
 
 // Подключение к устройству при нажатии на кнопку Connect
 connectButton.addEventListener('click', function () {
@@ -23,10 +22,6 @@ sendForm.addEventListener('submit', function (event) {
     inputField.value = ''; // Обнулить текстовое поле
     inputField.focus(); // Вернуть фокус на текстовое поле
 });
-
-// readButton.addEventListener('click', function () {
-//     return characteristic.writeValue('hello');
-// })
 
 // Кэш объекта выбранного устройства
 let deviceCache = null;
