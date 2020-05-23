@@ -81,18 +81,17 @@ function connectDeviceAndCacheCharacteristic(device) {
     return device.gatt.connect().
     then(server => {
         log('GATT server connected, getting service...');
-        //return server.getPrimaryService("0000aaa0-0000-1000-8000-aabbccddeeff");
-        return server.getPrimaryService(0x181C);
+        return server.getPrimaryService("0000aaa0-0000-1000-8000-aabbccddeeff");
     }).
     then(service => {
         log('Service found, getting characteristic...');
-        //let characteristicTest = service.getCharacteristic("0000aaa2-0000-1000-8000-aabbccddeeff");
+        let characteristic2 = service.getCharacteristic("0000aaa2-0000-1000-8000-aabbccddeeff");
         console.log(characteristicTest)
-        return service.getCharacteristic(0x2A8A);
-        // return service.getCharacteristic("0000aaa1-0000-1000-8000-aabbccddeeff");
+        return service.getCharacteristic("0000aaa1-0000-1000-8000-aabbccddeeff");
     }).
     then(characteristic => {
         log('Characteristic found');
+        characteristicTest = characteristic2;
         characteristicCache = characteristic;
 
         return characteristicCache;
@@ -200,7 +199,7 @@ function send(data) {
     } else {
         writeToCharacteristic(characteristicCache, data);
     }
-
+    characteristic2.target.value = 'test';
     log(data, 'out');
 }
 
