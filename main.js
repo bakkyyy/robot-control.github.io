@@ -96,16 +96,6 @@ function connectDeviceAndCacheCharacteristic(device) {
     });
 }
 
-// Включение получения уведомлений об изменении характеристики
-function startNotifications(characteristic) {
-    log('Starting notifications...');
-
-    return characteristic.startNotifications().
-    then(() => {
-        log('Notifications started');
-    });
-}
-
 // Вывод в терминал
 function log(data, type = '') {
     terminalContainer.insertAdjacentHTML('beforeend',
@@ -161,22 +151,22 @@ function handleCharacteristicValueChanged(event) {
 let readBuffer = '';
 
 // Получение данных
-function handleCharacteristicValueChanged(event) {
-    let value = new TextDecoder().decode(event.target.value);
+// function handleCharacteristicValueChanged(event) {
+//     let value = new TextDecoder().decode(event.target.value);
 
-    for (let c of value) {
-        if (c === '\n') {
-            let data = readBuffer.trim();
-            readBuffer = '';
+//     for (let c of value) {
+//         if (c === '\n') {
+//             let data = readBuffer.trim();
+//             readBuffer = '';
 
-            if (data) {
-                receive(data);
-            }
-        } else {
-            readBuffer += c;
-        }
-    }
-}
+//             if (data) {
+//                 receive(data);
+//             }
+//         } else {
+//             readBuffer += c;
+//         }
+//     }
+// }
 
 // Обработка полученных данных
 function receive(data) {
@@ -184,8 +174,6 @@ function receive(data) {
 }
 
 
-
-// Отправить данные подключенному устройству
 // Отправить данные подключенному устройству
 function send(data) {
     data = String(data);
