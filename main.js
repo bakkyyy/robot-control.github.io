@@ -198,6 +198,7 @@ function send(data) {
         }
     } else {
         characteristicTest.writeValue(data);
+        
         writeToCharacteristic(characteristicCache, data);
     }
 
