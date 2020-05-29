@@ -5,14 +5,22 @@ let terminalContainer = document.getElementById('terminal');
 let sendForm = document.getElementById('send-form');
 let inputField = document.getElementById('input');
 let clearbutton = document.getElementById('clear');
-
+let commands = ["Вперед", "ФункцияБ", "Освещение", "ФункцияА", "Конец"];
+let functionA = ["Вперед", "Вниз", "Освещение", "ФункцияБ", "Конец"];
+let functionB = ["Вперед", "Вниз", "Освещение", "Назад", "Конец"];
 // Кэш для объекта устройства
 let deviceCache = null;
 
 // Кэш для объекта характеристики
 let characteristicCache = null;
 
+
+function blockColor(id) {
+    document.getElementById(id).style.backgroundColor = "#21fe96";
+}
+
 //Функция для автоматического скроллинга терминала
+
 function scroll() {
     let terminal = document.getElementById('terminal');
     terminal.scrollTop = 9999;
@@ -22,8 +30,117 @@ function clear() {
     terminalContainer.innerHTML = '';
 }
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
+let i = 0;
+let j = 5;
+let k = 10;
+let check = true;
+let checkB = true;
+let who = null;
+
+function myForProgramm() {
+    setTimeout(function () {
+        console.log("i = ", i)
+        if (commands[i] == "ФункцияА") {
+            console.log('A')
+            check = false;
+            myForFunctionA()
+        } else if (commands[i] == "ФункцияБ") {
+            console.log('B')
+            k = 10;
+            check = false;
+            who = "program";
+            myForFunctionB()
+        }
+        if (check == true) {
+            blockColor(i);
+            i++;
+            if (i < 5) {
+                myForProgramm();
+            } else {
+                sleep(1000).then(() => {
+                    document.querySelectorAll(".prog").forEach(function (item) {
+                        item.style.backgroundColor = "#255a41";
+                    });
+
+                    log("Выполнение завершено...")
+                })
+
+            }
+        }
+    }, 500)
+}
+
+function myForFunctionA() {
+    setTimeout(function () {
+        console.log("j = ", j)
+        if (functionA[j - 5] == "ФункцияБ") {
+            console.log('BB')
+            check = false;
+            checkB = false;
+            who = "A";
+            k = 10;
+            myForFunctionB()
+        }
+        if (checkB == true) {
+            blockColor(j);
+            j++;
+            if (j < 10) {
+                myForFunctionA();
+            } else {
+                sleep(1000).then(() => {
+                    document.querySelectorAll(".fa").forEach(function (item) {
+                        item.style.backgroundColor = "#255a41";
+                    });
+                })
+                check = true;
+                blockColor(i);
+                i++;
+                myForProgramm();
+            }
+        }
+    }, 500)
+}
+
+function myForFunctionB() {
+    setTimeout(function () {
+        console.log("k = ", k)
+        blockColor(k);
+        k++;
+        if (k < 15) {
+            myForFunctionB();
+        } else {
+            sleep(1000).then(() => {
+                document.querySelectorAll(".fb").forEach(function (item) {
+                    item.style.backgroundColor = "#255a41";
+                });
+            })
+            check = true;
+            checkB = true;
+            if (who == "A") {
+                blockColor(j);
+                j++;
+                myForFunctionA();
+            } else {
+                blockColor(i);
+                i++;
+                myForProgramm()
+            }
+        }
+    }, 500)
+}
+
 clearbutton.addEventListener('click', function () {
     clear();
+    log("Выполняю...")
+    i = 0;
+    j = 5;
+    k = 10;
+    myForProgramm();
 })
 
 // Подключение к роботу при нажатии на кнопку "Подключиться"
