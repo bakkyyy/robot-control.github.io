@@ -17,7 +17,7 @@
 </head>
 
 <body onclick="scroll()">
-    <div class="version">version 6.3</div>
+    <div class="version">version 6.4</div>
     <div class="terminal" id="terminal">
         <div>>Подключение к устройству...</div>
         <div class="out">>Исходящее сообщение</div>
@@ -49,26 +49,35 @@
             <div id="14" class="block fb"></div>
         </div>
     </div>
-    <div class="connect-panel">
-        <button id="connect" type="button" class="connect-button">Подключиться</button>
+    <div class="button-panel">
+        <div class="connect-panel">
+            <button id="connect" type="button" class="connect-button">Подключиться</button>
 
-        <button id="disconnect" type="button" class="connect-button">Отключиться</button>
-    </div>
-    <button id="clear" type="button" class="clear">Очистить</button>
-    <form id="send-form">
-        <input id="input" type="text" style="display: none;">
-        <button type="submit" style="display: none;">Отправить</button>
-        <div class="move-panel">
-            <div class="vertical">
-                <button type="submit" class="move up">↑</button>
-                <button type="submit" class="down move">↓</button>
-            </div>
-            <div class="horizontal">
-                <button type="submit" class="move left">←</button>
-                <button type="submit" class="move right">→</button>
-            </div>
+            <button id="disconnect" type="button" class="connect-button">Отключиться</button>
         </div>
-    </form>
+        <button id="clear" type="button" class="clear">Очистить</button>
+
+
+
+        <form id="send-form">
+            <input id="input" type="text" style="display: none;">
+            <button type="submit" style="display: none;">Отправить</button>
+            <div class="move-panel">
+                <div class="vertical">
+                    <button type="submit" class="move up">↑</button>
+                    <button type="submit" class="down move">↓</button>
+                </div>
+                <div class="horizontal">
+                    <button type="submit" class="move left">←</button>
+                    <button type="submit" class="move right">→</button>
+                </div>
+            </div>
+            <div class="start-end-panel">
+                <button type="submit" class="start" id="start">Старт</button>
+                <button type="submit" class="start" id="stop">Стоп</button>
+            </div>
+        </form>
+    </div>
 
     <script src="main.js"></script>
 

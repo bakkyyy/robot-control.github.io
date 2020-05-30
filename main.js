@@ -5,14 +5,19 @@ let terminalContainer = document.getElementById('terminal');
 let sendForm = document.getElementById('send-form');
 let inputField = document.getElementById('input');
 let clearbutton = document.getElementById('clear');
+let startbutton = document.getElementById('start');
+let stopbutton = document.getElementById('stop');
 let commands = ["Вперед", "ФункцияБ", "Освещение", "ФункцияА", "Конец"];
 let functionA = ["Вперед", "Вниз", "Освещение", "ФункцияБ", "Конец"];
 let functionB = ["Вперед", "Вниз", "Освещение", "Назад", "Конец"];
+
 // Кэш для объекта устройства
 let deviceCache = null;
 
 // Кэш для объекта характеристики
 let characteristicCache = null;
+
+let checkConnect = true;
 
 
 function blockColor(id) {
@@ -34,114 +39,113 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-
+let count = 1;
 let i = 0;
 let j = 5;
 let k = 10;
-let check = true;
-let checkB = true;
-let who = null;
-
-function myForProgramm() {
-    setTimeout(function () {
-        console.log("i = ", i)
+let stop = false;
+async function StartProgram() {
+    for (let i = 0; i < commands.length; i++) {
+        await sleep(500);
+        console.log(count++ + ")" + "П: " + commands[i])
         if (commands[i] == "ФункцияА") {
-            console.log('A')
-            check = false;
-            myForFunctionA()
-        } else if (commands[i] == "ФункцияБ") {
-            console.log('B')
-            k = 10;
-            check = false;
-            who = "program";
-            myForFunctionB()
+            await funcA();
         }
-        if (check == true) {
-            blockColor(i);
-            i++;
-            if (i < 5) {
-                myForProgramm();
-            } else {
-                sleep(1000).then(() => {
-                    document.querySelectorAll(".prog").forEach(function (item) {
-                        item.style.backgroundColor = "#255a41";
-                    });
-
-                    log("Выполнение завершено...")
-                })
-
-            }
+        if (commands[i] == "ФункцияБ") {
+            await funcB();
         }
-    }, 500)
+        if (stop == true) {
+            return;
+        }
+        send(commands[i]);
+        blockColor(i);
+    }
+    await sleep(1000);
+    document.querySelectorAll(".prog").forEach(function (item) {
+        item.style.backgroundColor = "#255a41";
+    });
+    log("Выполнение завершено")
 }
 
-function myForFunctionA() {
-    setTimeout(function () {
-        console.log("j = ", j)
-        if (functionA[j - 5] == "ФункцияБ") {
-            console.log('BB')
-            check = false;
-            checkB = false;
-            who = "A";
-            k = 10;
-            myForFunctionB()
+async function funcA() {
+    for (let j = 5; j < functionA.length + 5; j++) {
+        await sleep(500);
+        if (stop == true) {
+            return;
         }
-        if (checkB == true) {
-            blockColor(j);
-            j++;
-            if (j < 10) {
-                myForFunctionA();
-            } else {
-                sleep(1000).then(() => {
-                    document.querySelectorAll(".fa").forEach(function (item) {
-                        item.style.backgroundColor = "#255a41";
-                    });
-                })
-                check = true;
-                blockColor(i);
-                i++;
-                myForProgramm();
-            }
+        send(functionA[j - 5]);
+        console.log(count++ + ")" + "A: " + functionA[j - 5])
+        if (functionA[j - 5] == "ФункцияА") {
+            await funcA();
+        } else if (functionA[j - 5] == "ФункцияБ") {
+            await funcB();
         }
-    }, 500)
+        blockColor(j);
+    }
+    await sleep(500);
+    document.querySelectorAll(".fa").forEach(function (item) {
+        item.style.backgroundColor = "#255a41";
+    });
 }
 
-function myForFunctionB() {
-    setTimeout(function () {
-        console.log("k = ", k)
+async function funcB() {
+    for (let k = 10; k < functionB.length + 10; k++) {
+        await sleep(500);
+        if (stop == true) {
+            return;
+        }
+        send(functionB[k - 10]);
+        console.log(count++ + ")" + "Б: " + functionB[k - 10])
+        if (functionB[k - 10] == "ФункцияА") {
+            await funcA();
+        } else if (functionB[k - 10] == "ФункцияБ") {
+            await funcB();
+        }
         blockColor(k);
-        k++;
-        if (k < 15) {
-            myForFunctionB();
-        } else {
-            sleep(1000).then(() => {
-                document.querySelectorAll(".fb").forEach(function (item) {
-                    item.style.backgroundColor = "#255a41";
-                });
-            })
-            check = true;
-            checkB = true;
-            if (who == "A") {
-                blockColor(j);
-                j++;
-                myForFunctionA();
-            } else {
-                blockColor(i);
-                i++;
-                myForProgramm()
-            }
-        }
-    }, 500)
+    }
+    await sleep(500);
+    document.querySelectorAll(".fb").forEach(function (item) {
+        item.style.backgroundColor = "#255a41";
+    });
 }
 
 clearbutton.addEventListener('click', function () {
     clear();
-    log("Выполняю...")
-    i = 0;
-    j = 5;
-    k = 10;
-    myForProgramm();
 })
+
+startbutton.addEventListener('click', function () {
+    if (checkConnect == true) {
+        stop = false;
+        log("Выполняю...")
+        i = 0;
+        j = 5;
+        k = 10;
+        count = 1;
+        StartProgram();
+    } else {
+        log("[Ошибка] Устройство не подключено");
+        return;
+    }
+})
+stopbutton.addEventListener('click', async function () {
+    if (checkConnect == true) {
+        stop = true;
+        await sleep(500);
+        document.querySelectorAll(".block").forEach(function (item) {
+            item.style.backgroundColor = "rgb(145, 45, 45)";
+        });
+        await sleep(500);
+        document.querySelectorAll(".block").forEach(function (item) {
+            item.style.backgroundColor = "#255a41";
+        });
+        log("Выполнение прекращено")
+        console.log(count++ + ")" + "Прекращено пользователем")
+    } else {
+        log("[Ошибка] Устройство не подключено");
+        return;
+    }
+})
+
 
 // Подключение к роботу при нажатии на кнопку "Подключиться"
 connectButton.addEventListener('click', function () {
@@ -179,7 +183,6 @@ function requestBluetoothDevice() {
     }).
     then(device => {
         log('Bluetooth устройство выбрано');
-        console.log(device)
         deviceCache = device;
         deviceCache.addEventListener('gattserverdisconnected',
             handleDisconnection);
@@ -235,6 +238,7 @@ function startNotifications(characteristic) {
     return characteristic.startNotifications().
     then(() => {
         log('Уведомления включены');
+        checkConnect = true;
         characteristic.addEventListener('characteristicvaluechanged',
             handleCharacteristicValueChanged);
     });
@@ -250,8 +254,10 @@ function disconnect() {
         if (deviceCache.gatt.connected) {
             deviceCache.gatt.disconnect();
             log('Bluetooth устройство отключено');
+            checkConnect = false;
         } else {
             log('Bluetooth устройство уже отключено');
+            checkConnect = false;
         }
     }
     if (characteristicCache) {
@@ -297,7 +303,6 @@ function send(data) {
     } else {
         writeToCharacteristic(characteristicCache, data);
         characteristicCache.value = data;
-        console.log(characteristicCache)
     }
     log(data, 'out');
 }

@@ -25,7 +25,10 @@ body {
 	margin-top: 3vw;
 	display: flex;
 	justify-content: space-between;
-	border: 1px solid white;
+}
+
+.button-panel {
+	height: 45vh;
 }
 
 .program-panel {
@@ -69,8 +72,6 @@ body {
 	top: 10%;
 	position: relative;
 	background-color: #255a41;
-
-
 }
 
 
@@ -96,13 +97,12 @@ button {
 }
 
 .clear {
-	font-size: 20px;
+	font-size: 15px;
 	text-align: center;
 	padding-top: 2%;
-	width: 30%;
 	padding-bottom: 2%;
 	border-radius: 70px;
-	margin-left: 60%;
+	margin-left: 10%;
 	margin-top: 10%;
 }
 
@@ -113,9 +113,34 @@ button {
 }
 
 .move-panel {
-	width: 210px;
-	height: 210px;
+	width: 150px;
+	height: 150px;
 	margin-left: 10%;
+	margin-top: 10%;
+}
+
+.start-end-panel {
+	height: 100px;
+	width: 100px;
+	right: 10%;
+	margin-top: 20%;
+	position: absolute;
+	display: table;
+}
+
+.start {
+	font-size: 20px;
+	text-align: center;
+	padding-top: 2%;
+	padding-bottom: 2%;
+	border-radius: 70px;
+	width: 80%;
+	margin: 10%;
+}
+
+form {
+	display: inline-flex;
+	width: 100%;
 }
 
 .horizontal {
