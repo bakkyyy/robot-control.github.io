@@ -107,10 +107,8 @@ button {
 }
 
 .version {
-	position: absolute;
-	bottom: 0;
-	right: 1%;
-	color: white;
+	position: relative;
+	color: black;
 }
 
 .move-panel {
