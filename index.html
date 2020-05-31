@@ -13,11 +13,13 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
     <link rel="manifest" crossorigin="use-credentials" href="/manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="msapplication-starturl" content="/index.html">
     <title>Robot Control</title>
 </head>
 
 <body onclick="scroll()">
-    <div class="version">version 7.1</div>
+    <div class="version">version 7.2</div>
     <div class="terminal" id="terminal">
         <div>>Подключение к устройству...</div>
         <div class="out">>Исходящее сообщение</div>
@@ -80,7 +82,19 @@
     </div>
 
     <script src="main.js"></script>
-
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('/sw.js').then(function (registration) {
+                        console.log('ServiceWorker registration successful with scope: ', registration
+                            .scope);
+                    },
+                    function (err) {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
 </body>
 
 </html>
