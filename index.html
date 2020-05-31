@@ -19,7 +19,7 @@
 </head>
 
 <body onclick="scroll()">
-    <div class="version">version 7.4</div>
+    <div class="version">version 7.5</div>
     <div class="terminal" id="terminal">
         <div>>Подключение к устройству...</div>
         <div class="out">>Исходящее сообщение</div>
@@ -66,12 +66,12 @@
             <button type="submit" style="display: none;">Отправить</button>
             <div class="move-panel">
                 <div class="vertical">
-                    <button type="submit" class="move up">↑</button>
-                    <button type="submit" class="down move">↓</button>
+                    <button type="submit" class="move up" id="up">↑</button>
+                    <button type="submit" class="down move" id="down">↓</button>
                 </div>
                 <div class="horizontal">
-                    <button type="submit" class="move left">←</button>
-                    <button type="submit" class="move right">→</button>
+                    <button type="submit" class="move left" id="left">←</button>
+                    <button type="submit" class="move right" id="right">→</button>
                 </div>
             </div>
             <div class="start-end-panel">

@@ -7,6 +7,10 @@ let inputField = document.getElementById('input');
 let clearbutton = document.getElementById('clear');
 let startbutton = document.getElementById('start');
 let stopbutton = document.getElementById('stop');
+let moveup = document.getElementById('up');
+let movedown = document.getElementById('down');
+let moveleft = document.getElementById('left');
+let moveright = document.getElementById('right');
 let commands = ["Вперед", "ФункцияБ", "Освещение", "ФункцияА", "Конец"];
 let functionA = ["Вперед", "Вниз", "Освещение", "ФункцияБ", "Конец"];
 let functionB = ["Вперед", "Вниз", "Освещение", "Назад", "Конец"];
@@ -17,7 +21,7 @@ let deviceCache = null;
 // Кэш для объекта характеристики
 let characteristicCache = null;
 
-let checkConnect = true;
+let checkConnect = false;
 
 
 function blockColor(id) {
@@ -48,6 +52,7 @@ async function StartProgram() {
     for (let i = 0; i < commands.length; i++) {
         await sleep(500);
         console.log(count++ + ")" + "П: " + commands[i])
+        send(commands[i]);
         if (commands[i] == "ФункцияА") {
             await funcA();
         }
@@ -57,7 +62,6 @@ async function StartProgram() {
         if (stop == true) {
             return;
         }
-        send(commands[i]);
         blockColor(i);
     }
     await sleep(1000);
@@ -111,6 +115,19 @@ async function funcB() {
 
 clearbutton.addEventListener('click', function () {
     clear();
+})
+
+moveup.addEventListener('click', function () {
+    send("Вверх")
+})
+movedown.addEventListener('click', function () {
+    send("Вниз")
+})
+moveleft.addEventListener('click', function () {
+    send("Влево")
+})
+moveright.addEventListener('click', function () {
+    send("Вправо")
 })
 
 startbutton.addEventListener('click', function () {
@@ -238,6 +255,7 @@ function startNotifications(characteristic) {
     return characteristic.startNotifications().
     then(() => {
         log('Уведомления включены');
+        log('Готово к работе');
         checkConnect = true;
         characteristic.addEventListener('characteristicvaluechanged',
             handleCharacteristicValueChanged);
