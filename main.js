@@ -19,19 +19,6 @@ let characteristicCache = null;
 
 let checkConnect = true;
 
-window.addEventListener('load', () => {
-    registerSW();
-})
-
-async function registerSW() {
-    if ('serviceWorker' in navigator) {
-        try {
-            await navigator.serviceWorker.register('./sw.js');
-        } catch (e) {
-            console.log("Ошибка регистрации SW")
-        }
-    }
-}
 
 function blockColor(id) {
     document.getElementById(id).style.backgroundColor = "#21fe96";
